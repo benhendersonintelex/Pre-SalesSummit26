@@ -1,1 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSC Summit — Facilitator Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --bg: #f8f8fb;
+  --surface: #ffffff;
+  --ink: #0a0a0f;
+  --ink2: #1a1a2e;
+  --mid: #64648a;
+  --soft: #a0a0c0;
+  --rule: #eaeaf2;
+  --hover-bg: #f4f4f9;
+  --indigo: #4f46e5;
+  --indigo-light: #eef2ff;
+  --indigo-mid: #c7d2fe;
+  --violet: #7c3aed;
+  --violet-light: #f5f3ff;
+  --coral: #f43f5e;
+  --coral-light: #fff1f2;
+  --emerald: #059669;
+  --emerald-light: #ecfdf5;
+  --amber: #d97706;
+  --amber-light: #fffbeb;
+  --sky: #0284c7;
+  --sky-light: #f0f9ff;
+  --slate: #475569;
+  --slate-light: #f1f5f9;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 3px rgba(10,10,31,0.06), 0 4px 16px rgba(10,10,31,0.04);
+  --shadow-hover: 0 4px 12px rgba(79,70,229,0.1), 0 8px 32px rgba(10,10,31,0.06);
+  --font: 'Outfit', system-ui, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-weight: 300;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
 
+/* ── HEADER ── */
+header {
+  background: var(--ink2);
+  position: relative;
+  overflow: hidden;
+}
+.header-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(79,70,229,0.35) 0%, transparent 65%);
+  top: -200px; right: -100px;
+  pointer-events: none;
+}
+.header-glow2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 65%);
+  bottom: -150px; left: 5%;
+  pointer-events: none;
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 56px 64px;
+  position: relative;
+}
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(79,70,229,0.2);
+  border: 1px solid rgba(79,70,229,0.4);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #a5b4fc;
+  margin-bottom: 28px;
+}
+.header-badge-dot {
+  width: 6px; height: 6px;
+  background: #818cf8;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.5; transform:scale(0.8); }
+}
+h1 {
+  font-size: clamp(52px, 7vw, 88px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -2.5px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+h1 .accent {
+  background: linear-gradient(135deg, #818cf8, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header-role {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.35);
+  margin-top: 6px;
+  margin-bottom: 28px;
+}
+.header-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+.meta-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.6);
+}
+
+/* ── MANDATE ── */
+.mandate {
+  background: linear-gradient(135deg, var(--indigo), var(--violet));
+  padding: 20px 56px;
+}
+.mandate-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.mandate-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  white-space: nowrap;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+.mandate-text { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.9); }
+.mandate-text strong { color: white; font-weight: 600; }
+
+/* ── NAV ── */
+.nav {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav-tab {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 16px 20px;
+  cursor: pointer;
+  color: var(--soft);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-tab:hover { color: var(--ink); }
+.nav-tab.active { color: var(--indigo); border-bottom-color: var(--indigo); }
+
+/* ── MAIN ── */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 56px 80px;
+}
+.day-view { display: none; }
+.day-view.active { display: block; }
+
+/* ── DAY HEADER ── */
+.day-header {
+  padding: 56px 0 36px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 36px;
+}
+.day-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin-bottom: 10px;
+}
+.day-title {
+  font-size: clamp(30px, 3.5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.day-goal {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.6;
+  margin-top: 10px;
+  max-width: 600px;
+}
+.day-num {
+  font-size: 88px;
+  font-weight: 800;
+  color: var(--rule);
+  line-height: 1;
+  letter-spacing: -4px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ── SESSION LIST ── */
+.session-list { display: flex; flex-direction: column; gap: 8px; }
+
+/* ── SESSION CARD ── */
+.scard {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+}
+.scard:hover { box-shadow: var(--shadow-hover); border-color: var(--indigo-mid); transform: translateY(-1px); }
+
+.scard-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 20px;
+  cursor: pointer;
+  user-select: none;
+  min-height: 66px;
+}
+
+/* Time + duration column */
+.scard-time-block {
+  flex-shrink: 0;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.scard-time {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--indigo);
+}
+.scard-dur {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--soft);
+}
+
+.scard-icon {
+  width: 36px; height: 36px;
+  background: var(--indigo-light);
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.scard-info { flex: 1; min-width: 0; }
+.scard-num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin-bottom: 2px;
+}
+.scard-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; margin-bottom: 2px; }
+.scard-sub { font-size: 12px; color: var(--mid); }
+
+.scard-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+.badge-workshop { background: var(--sky-light); color: var(--sky); }
+.badge-practice { background: var(--coral-light); color: var(--coral); }
+.badge-team     { background: var(--amber-light); color: var(--amber); }
+.badge-social   { background: var(--emerald-light); color: var(--emerald); }
+.badge-identity { background: var(--indigo-light); color: var(--indigo); }
+.badge-prework  { background: var(--violet-light); color: var(--violet); }
+.badge-senior   { background: #fdf2f8; color: #9d174d; }
+
+.scard-chevron {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  color: var(--soft);
+  transition: background 0.2s, transform 0.25s;
+  flex-shrink: 0;
+}
+.scard:hover .scard-chevron { background: var(--indigo-light); color: var(--indigo); }
+.scard.open .scard-chevron { transform: rotate(180deg); background: var(--indigo-light); color: var(--indigo); }
+
+/* ── DETAIL ── */
+.scard-detail { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1); }
+.scard.open .scard-detail { max-height: 4000px; }
+.scard-detail-inner {
+  border-top: 1px solid var(--rule);
+  padding: 24px 24px 28px 134px;
+  background: #fcfcff;
+}
+
+/* ── BLOCKS ── */
+.att-block {
+  background: var(--indigo-light);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+.att-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--indigo); margin-bottom: 7px; }
+.att-text { font-size: 13px; line-height: 1.7; color: var(--ink2); }
+
+.identity-block {
+  background: linear-gradient(135deg, rgba(79,70,229,0.05), rgba(124,58,237,0.05));
+  border: 1px solid var(--indigo-mid);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.6;
+}
+.identity-block strong { color: var(--indigo); font-weight: 600; }
+
+.detail-sec { margin-bottom: 18px; }
+.detail-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 8px;
+}
+.detail-text { font-size: 13px; line-height: 1.7; color: var(--ink2); }
+
+.steps { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.steps li { display: flex; gap: 12px; font-size: 13px; line-height: 1.6; color: var(--ink2); }
+.step-n {
+  min-width: 20px; height: 20px;
+  background: var(--indigo);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tip-box {
+  background: var(--amber-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #7c5000;
+  line-height: 1.6;
+  margin-top: 6px;
+}
+.tip-box strong { color: var(--amber); font-weight: 600; }
+
+/* ── BREAK / SOCIAL CARDS ── */
+.break-card {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 20px;
+  opacity: 0.65;
+  min-height: 46px;
+}
+.break-time-block { min-width: 100px; }
+.break-time { font-size: 12px; font-weight: 700; color: var(--soft); }
+.break-dur  { font-size: 11px; color: var(--soft); font-weight: 400; }
+.break-icon { font-size: 16px; }
+.break-label { font-size: 13px; color: var(--mid); }
+.break-note { font-size: 12px; color: var(--soft); margin-left: auto; font-style: italic; max-width: 360px; text-align: right; }
+
+.personal-card {
+  background: linear-gradient(135deg, rgba(79,70,229,0.03), rgba(124,58,237,0.03));
+  border: 1px solid var(--indigo-mid);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 20px;
+  min-height: 46px;
+}
+
+/* ── TRAVEL CARD ── */
+.travel-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  box-shadow: var(--shadow);
+}
+.travel-icon { font-size: 22px; flex-shrink: 0; }
+.travel-info h3 { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+.travel-info p { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+/* ── PRE-WORK CARD ── */
+.prework-card {
+  background: var(--surface);
+  border: 2px solid var(--indigo);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(79,70,229,0.12);
+}
+.prework-card:hover { box-shadow: 0 8px 32px rgba(79,70,229,0.18); }
+.prework-banner {
+  background: linear-gradient(135deg, var(--indigo), var(--violet));
+  padding: 8px 20px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: white;
+}
+.prework-card .scard-detail { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1); }
+.prework-card.open .scard-detail { max-height: 4000px; }
+.prework-card.open .scard-chevron { transform: rotate(180deg); background: var(--indigo-light); color: var(--indigo); }
+
+/* ── SCORECARD ── */
+.scorecard { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.sc-item { background: var(--bg); border: 1px solid var(--rule); border-radius: var(--radius-sm); padding: 12px 14px; }
+.sc-label { font-size: 11px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.sc-desc { font-size: 12px; color: var(--mid); line-height: 1.5; }
+.sc-scale { display: flex; gap: 4px; margin-top: 8px; }
+.sc-pip {
+  width: 24px; height: 24px;
+  border: 1.5px solid var(--rule);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 600; color: var(--soft);
+}
+
+/* ── SECTION LABEL ── */
+.sec-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 12px;
+}
+.sec-divider-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--indigo); white-space: nowrap;
+}
+.sec-divider-line { flex: 1; height: 1px; background: var(--indigo-mid); }
+
+/* ── LOAD ANIMATION ── */
+.day-view.active .scard,
+.day-view.active .break-card,
+.day-view.active .personal-card,
+.day-view.active .travel-card,
+.day-view.active .prework-card {
+  animation: slideUp 0.3s ease both;
+}
+.day-view.active .scard:nth-child(1)  { animation-delay: 0.02s; }
+.day-view.active .scard:nth-child(2)  { animation-delay: 0.05s; }
+.day-view.active .scard:nth-child(3)  { animation-delay: 0.08s; }
+.day-view.active .scard:nth-child(4)  { animation-delay: 0.11s; }
+.day-view.active .scard:nth-child(5)  { animation-delay: 0.14s; }
+.day-view.active .scard:nth-child(6)  { animation-delay: 0.17s; }
+.day-view.active .scard:nth-child(7)  { animation-delay: 0.20s; }
+.day-view.active .scard:nth-child(8)  { animation-delay: 0.23s; }
+.day-view.active .scard:nth-child(9)  { animation-delay: 0.26s; }
+.day-view.active .scard:nth-child(10) { animation-delay: 0.29s; }
+.day-view.active .scard:nth-child(11) { animation-delay: 0.32s; }
+.day-view.active .scard:nth-child(12) { animation-delay: 0.35s; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .header-inner { padding: 48px 24px 40px; }
+  .mandate { padding: 16px 24px; }
+  .nav { padding: 0 24px; }
+  .main { padding: 0 24px 60px; }
+  .day-header { flex-direction: column; }
+  .day-num { display: none; }
+  .scard-detail-inner { padding-left: 22px; }
+  .scorecard { grid-template-columns: 1fr; }
+  .scard-right .badge { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-glow"></div>
+  <div class="header-glow2"></div>
+  <div class="header-inner">
+    <div class="header-badge"><div class="header-badge-dot"></div>Pre-Sales · Product Solutions Consulting · Facilitator Guide</div>
+    <h1>PSC <span class="accent">Summit</span></h1>
+    <div class="header-role">Facilitator Guide — Internal Only</div>
+    <div class="header-meta">
+      <div class="meta-tag">Monday – Thursday</div>
+      <div class="meta-tag">7 Attendees + Manager</div>
+      <div class="meta-tag">Story · Discovery · Technical Win · AAA</div>
+    </div>
+  </div>
+</header>
+
+<div class="mandate">
+  <div class="mandate-inner">
+    <div class="mandate-label">Mandate</div>
+    <div class="mandate-text">You are <strong>accountable for the technical win</strong> — not just a great demo. Understand the prospect's world (<strong>Audience &amp; Annoyance</strong>), tell a story that lets them see themselves in the <strong>Afterward</strong>, and get their explicit agreement that the solution meets their needs before the deal moves forward.</div>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-tab active" onclick="showDay('pre',this)">Pre-Work</div>
+  <div class="nav-tab" onclick="showDay('mon',this)">Monday</div>
+  <div class="nav-tab" onclick="showDay('tue',this)">Tuesday</div>
+  <div class="nav-tab" onclick="showDay('wed',this)">Wednesday</div>
+  <div class="nav-tab" onclick="showDay('thu',this)">Thursday</div>
+</nav>
+
+<div class="main">
+
+<!-- ═══════════════════════ PRE-WORK ═══════════════════════ -->
+<div class="day-view active" id="day-pre">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Before You Arrive · Must Complete</div>
+      <div class="day-title">Pre-Work</div>
+      <div class="day-goal">One required task for all attendees. What they produce feeds into Tuesday's Pre-Work Feedback session — so it matters.</div>
+    </div>
+    <div class="day-num">P</div>
+  </div>
+  <div class="session-list">
+
+    <div class="prework-card" onclick="toggleCard(this)">
+      <div class="prework-banner">⚡ Required — complete before Monday</div>
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time" style="color:var(--violet)">Due</div><div class="scard-dur">Before arrival</div></div>
+        <div class="scard-icon" style="background:var(--violet-light)">🎬</div>
+        <div class="scard-info">
+          <div class="scard-num">Session P.1</div>
+          <div class="scard-title">Demo Recording Review</div>
+          <div class="scard-sub">Watch the recording you assign · Score it across 6 dimensions · Bring the completed scorecard</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-prework">Pre-Work</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block">
+            <div class="att-label">For attendees</div>
+            <div class="att-text">Your manager will send you a demo recording to watch before you travel. Watch it carefully and score it using the six-dimension scorecard below — rating 1–5 for each with brief notes. There are no right or wrong answers. What matters is your honest, independent view. Bring your completed scorecard to Tuesday — it feeds directly into the Pre-Work Feedback session at 10:45 AM.</div>
+          </div>
+          <div class="detail-sec">
+            <div class="detail-label">The Scorecard — Rate Each Dimension 1–5</div>
+            <div class="scorecard">
+              <div class="sc-item"><div class="sc-label">1. Audience & Annoyance</div><div class="sc-desc">Did the presenter show deep knowledge of the Audience and the Annoyance? Confirmed before showing anything?</div><div class="sc-scale"><div class="sc-pip">1</div><div class="sc-pip">2</div><div class="sc-pip">3</div><div class="sc-pip">4</div><div class="sc-pip">5</div></div></div>
+              <div class="sc-item"><div class="sc-label">2. Storytelling & Afterward</div><div class="sc-desc">Did the demo tell a story toward a clear Afterward, or was it a feature walkthrough? Did customer stories make the Afterward vivid?</div><div class="sc-scale"><div class="sc-pip">1</div><div class="sc-pip">2</div><div class="sc-pip">3</div><div class="sc-pip">4</div><div class="sc-pip">5</div></div></div>
+              <div class="sc-item"><div class="sc-label">3. Prospect Engagement</div><div class="sc-desc">How engaged did the prospect appear? Did the presenter use questions, pauses, and confirming moments throughout?</div><div class="sc-scale"><div class="sc-pip">1</div><div class="sc-pip">2</div><div class="sc-pip">3</div><div class="sc-pip">4</div><div class="sc-pip">5</div></div></div>
+              <div class="sc-item"><div class="sc-label">4. Objection Handling</div><div class="sc-desc">Were objections handled with confidence? Acknowledge, clarify, and bridge — or deflect?</div><div class="sc-scale"><div class="sc-pip">1</div><div class="sc-pip">2</div><div class="sc-pip">3</div><div class="sc-pip">4</div><div class="sc-pip">5</div></div></div>
+              <div class="sc-item"><div class="sc-label">5. In-Demo Confirmation</div><div class="sc-desc">Did the presenter check in during the demo — "does this match the world you described?" moments?</div><div class="sc-scale"><div class="sc-pip">1</div><div class="sc-pip">2</div><div class="sc-pip">3</div><div class="sc-pip">4</div><div class="sc-pip">5</div></div></div>
+              <div class="sc-item"><div class="sc-label">6. Technical Agreement Close</div><div class="sc-desc">Did the presenter attempt to get the prospect's explicit agreement that the solution meets their needs?</div><div class="sc-scale"><div class="sc-pip">1</div><div class="sc-pip">2</div><div class="sc-pip">3</div><div class="sc-pip">4</div><div class="sc-pip">5</div></div></div>
+            </div>
+          </div>
+          <div class="detail-sec">
+            <div class="detail-label">Also Bring</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>One thing to steal</strong> — a technique, phrase, or structural choice to incorporate into their own demos. Specific moment, not general observation.</div></li>
+              <li><div class="step-n">2</div><div><strong>One thing they'd change</strong> — not just "ask more questions" but specifically what, when, and why.</div></li>
+              <li><div class="step-n">3</div><div><strong>Their overall take</strong> — one sentence on whether the demo moved the deal forward and what made the difference.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Choose the recording intentionally — real strengths and real gaps generate richer discussion than a polished one. Consider a demo from outside your direct team so people can be candid. This feeds directly into the 10:45 AM session on Tuesday, so the more specific their scorecards, the better that session will be.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="travel-card">
+      <div class="travel-icon">📅</div>
+      <div class="travel-info">
+        <h3>How This Feeds Into the Summit</h3>
+        <p>Completed scorecards are used in Session 1.3 — Pre-Work Feedback (Tuesday 10:45 AM). The group compares scores dimension by dimension, surfaces patterns, and uses the recording as a shared calibration reference before building their own skills. Attendees should come ready to share their scores and defend their reasoning.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════ MONDAY ═══════════════════════ -->
+<div class="day-view" id="day-mon">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 1 · Monday</div>
+      <div class="day-title">Arrivals & Kickoff</div>
+      <div class="day-goal">Get everyone in the room, settled in, and connected before the work begins.</div>
+    </div>
+    <div class="day-num">1</div>
+  </div>
+  <div class="session-list">
+
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">3:00 PM</div><div class="break-dur">240 min</div></div>
+      <div class="break-icon">✈️</div>
+      <div class="break-label">Arrivals</div>
+      <div class="break-note">Team travel and check-in. Aim to arrive by late afternoon.</div>
+    </div>
+
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">7:00 PM</div><div class="scard-dur">75 min</div></div>
+        <div class="scard-icon">🍽️</div>
+        <div class="scard-info">
+          <div class="scard-title">Social Dinner</div>
+          <div class="scard-sub">Relaxed team dinner — no agenda, just connect</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-social">Social</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">We kick off the week over dinner — no agenda, no presentations, just the team together. Settle in after travel, catch up, and start the week feeling connected. Come hungry, come relaxed. The work starts tomorrow.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">Purpose</div>
+            <div class="detail-text">Let people decompress from travel and build the relational energy that makes working sessions more productive. Comfortable teams take more risks, give better feedback, and engage more openly.</div>
+          </div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div>Choose a communal table or private room — avoid loud venues where conversation is hard.</div></li>
+              <li><div class="step-n">2</div><div>Arrive first and greet everyone as they show up. Tone: warm, relaxed, no shop talk required.</div></li>
+              <li><div class="step-n">3</div><div>One icebreaker to get things flowing: "What's one thing outside of work you've been into lately?" Around the table, keep it light.</div></li>
+              <li><div class="step-n">4</div><div>Near the end, briefly mention tomorrow's 8:30 AM start and build anticipation without over-briefing.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Resist previewing the agenda in depth. This dinner's only job is to make people feel glad they came.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════ TUESDAY ═══════════════════════ -->
+<div class="day-view" id="day-tue">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 2 · Tuesday</div>
+      <div class="day-title">Discovery & Demo Foundations</div>
+      <div class="day-goal">Establish the PSC identity, build the case for change, and develop the core skills: AAA discovery, storytelling, and demo craft. Sessions run 8:30 AM – 5:15 PM.</div>
+    </div>
+    <div class="day-num">2</div>
+  </div>
+  <div class="session-list">
+
+    <!-- Arrival & Registration -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">8:30 AM</div><div class="break-dur">30 min</div></div>
+      <div class="break-icon">☕</div>
+      <div class="break-label">Arrival & Registration</div>
+      <div class="break-note">Coffee, settle in, collect any materials</div>
+    </div>
+
+    <!-- 1.1 Expectation Setting -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">9:00 AM</div><div class="scard-dur">30 min</div></div>
+        <div class="scard-icon">🚀</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 1.1</div>
+          <div class="scard-title">Expectation Setting & Summit Kickoff</div>
+          <div class="scard-sub">Why we're here, what the week looks like, and how we're going to work together</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-identity">Identity</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">We open the summit together. You'll hear directly why this week exists, what we're building toward, and how the next three days are structured. The week will involve honest feedback, real practice, and real challenge. Come ready to engage fully — this is your week to grow.</div></div>
+          <div class="detail-sec"><div class="detail-label">Purpose</div><div class="detail-text">Set the emotional and intellectual frame for the entire summit. A strong kickoff creates psychological safety and momentum. This is also where you name the core reframe: PSC is accountable for the technical win, not just a great demo.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div>Stand up, no slides. Open with a story: a moment where a great or poor demo changed everything for a deal.</div></li>
+              <li><div class="step-n">2</div><div>Share the honest "why" behind this summit — what gap are you closing, what opportunity do you see? Inspire, don't just inform.</div></li>
+              <li><div class="step-n">3</div><div>Walk the three-day arc: Tuesday we build foundations. Wednesday we practise and prepare. Thursday we perform in front of senior leaders and lock the technical win.</div></li>
+              <li><div class="step-n">4</div><div>Set norms: be honest, take risks, give real feedback, challenge each other.</div></li>
+              <li><div class="step-n">5</div><div>Close with a go-around: each person says one word for how they want to feel at the end of Thursday. Capture on a whiteboard — revisit Thursday morning.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> This session is about you, not slides. The team will match whatever energy you bring into the room.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.2 Why We Change / Value Selling Recap -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">9:30 AM</div><div class="scard-dur">60 min</div></div>
+        <div class="scard-icon">💡</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 1.2</div>
+          <div class="scard-title">Why We Change: The Case for Value Selling</div>
+          <div class="scard-sub">Feature selling → solution selling → storytelling. Facilitated presentation + group discussion.</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-identity">Identity</span><span class="badge badge-workshop">Discussion</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">Before we build new skills, we need to understand why the old approach falls short — and feel it, not just hear it. We'll look at what prospects actually experience in a feature-led demo, explore the difference between feature selling, solution selling, and storytelling, and be honest about where our demos currently sit. This isn't a lecture. You'll be asked to contribute, challenge, and be candid about your own work. The goal is to leave genuinely wanting to change.</div></div>
+          <div class="identity-block"><strong>The core shift:</strong> Feature selling shows what the product does. Solution selling explains how it fits. But <strong>storytelling lets the prospect see themselves in the Afterward</strong> — and that's what creates trust and moves deals. If this session doesn't land emotionally, the week won't produce lasting change.</div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>Open from the prospect's chair (15 min):</strong> "Think of the last time you sat through a demo as a buyer. What did it feel like? What were you hoping for that you didn't get?" Take 3–4 responses. Then ask: "How often do you think your prospects feel the same way?" Let it sit.</div></li>
+              <li><div class="step-n">2</div><div><strong>The three selling modes (20 min):</strong> Three columns on the whiteboard: Feature Selling / Solution Selling / Storytelling. Walk through the same demo moment in all three modes. Which creates the most trust? Which do they currently operate in most of the time? This is the core case for change — a felt experience of the difference.</div></li>
+              <li><div class="step-n">3</div><div><strong>Honest self-assessment (15 min):</strong> Each person scores their most recent demo privately: (a) Did I understand the real Audience? (b) Did I truly uncover the Annoyance? (c) Did I paint an Afterward? No sharing yet. Then ask: "What did that feel like?" This is where emotional readiness surfaces. Don't rush it.</div></li>
+              <li><div class="step-n">4</div><div><strong>The feedback contract (10 min):</strong> "This week you'll get honest feedback from me and from each other. Let's agree now how we give and receive it." Write the norms on the whiteboard. Leave them up all week.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Score your own demo honestly in step 3, out loud, before asking them to do theirs privately. This session is the emotional foundation of the whole week. Don't rush the silence.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coffee Break -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">10:30 AM</div><div class="break-dur">15 min</div></div>
+      <div class="break-icon">☕</div>
+      <div class="break-label">Coffee Break</div>
+    </div>
+
+    <!-- 1.3 Pre-Work Feedback -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">10:45 AM</div><div class="scard-dur">75 min</div></div>
+        <div class="scard-icon">🔍</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 1.3</div>
+          <div class="scard-title">Pre-Work Feedback: Scorecard Debrief & Discovery</div>
+          <div class="scard-sub">Group scorecard debrief · AAA discovery framework · your real pipeline</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-workshop">Workshop</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">This session opens with a debrief of the demo recording you reviewed before the summit — everyone shares their scorecard and together we build a shared picture of what great looks like. From there we go deeper into discovery through the lens of AAA: Audience (who the real stakeholders are and what they care about), Annoyance (the pain actually costing them something), and Afterward (what winning looks like for them). The richer your picture of all three, the more precisely you can build a story that makes them see themselves in the solution.</div></div>
+          <div class="identity-block"><strong>Technical win connection:</strong> You can't get agreement that the solution meets requirements if you never established what the requirements are. The recording debrief surfaces the gap — the rest of this session teaches you how to close it.</div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>Scorecard debrief (25 min):</strong> Go dimension by dimension. Ask 2–3 people to share their score and one sentence of reasoning. Don't force consensus — disagreements are the richest moments. Pay particular attention to Audience & Annoyance and Technical Agreement Close.</div></li>
+              <li><div class="step-n">2</div><div><strong>"Steal it / change it" (10 min):</strong> Each person shares their one thing to steal and one thing they'd do differently. Capture on the whiteboard — reference points for Wednesday's practice.</div></li>
+              <li><div class="step-n">3</div><div><strong>The AAA discovery map (25 min):</strong> Three layers of great pre-demo discovery. Audience: who is the hero, what do they care about? Annoyance: not the surface pain but the underlying cost. Afterward: what does life look like when the problem is solved? Work in pairs on a scenario you provide, mapping all three. Share back.</div></li>
+              <li><div class="step-n">4</div><div><strong>Where to find the story material (15 min):</strong> Sources of AAA intel — CRM notes, AE knowledge, prior calls, LinkedIn, support tickets. Most PSC can describe the Annoyance. Very few have clearly articulated the Afterward for this specific prospect. That's the gap.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Choose the recording because it has something to teach. The debrief is richest when there's genuine disagreement — lean into moments where the group scored differently and ask "what did you see that I didn't?"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lunch -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">12:00 PM</div><div class="break-dur">60 min</div></div>
+      <div class="break-icon">🥗</div>
+      <div class="break-label">Lunch Break</div>
+    </div>
+
+    <!-- 1.4 Presentation Skills Workshop -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">1:00 PM</div><div class="scard-dur">75 min</div></div>
+        <div class="scard-icon">🎙️</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 1.4</div>
+          <div class="scard-title">Presentation Skills Workshop</div>
+          <div class="scard-sub">In-demo discovery, the Annoyance confirmation, and the Afterward story</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-workshop">Workshop</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">This workshop covers the mechanics of a great demo — how to open with impact, confirm discovery mid-demo, structure the show as a story toward the Afterward, keep your prospect engaged throughout, and handle objections without losing credibility. You'll practise key moments in pairs and leave with a clear sense of what a great demo looks and sounds like.</div></div>
+          <div class="identity-block"><strong>Technical win connection:</strong> Every time you confirm a requirement is met during the demo, you're building the case for the technical agreement at the end. Lock small confirmations throughout — don't wait until the final slide.</div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>The Annoyance anchor (15 min):</strong> Walk through the pattern: Name the Annoyance → Show the Afterward → Confirm. "You described [the Annoyance]. Here's what that looks like solved. Does that match the world you're trying to get to?" The group tries different versions: Story / Feature / Almost.</div></li>
+              <li><div class="step-n">2</div><div><strong>Engagement techniques (15 min):</strong> Signs of a disengaging room and what to do. Micro-questions, pausing on impact moments, using the prospect's language. Contrast with the narrate-every-click trap.</div></li>
+              <li><div class="step-n">3</div><div><strong>Objection handling (15 min):</strong> Types of objections — technical, competitive, scope, requirement gap. Acknowledge → Clarify → Bridge. Group practises with 3–4 real objections. The honest gap conversation vs. the deflection trap.</div></li>
+              <li><div class="step-n">4</div><div><strong>Practise in pairs (30 min):</strong> Each pair runs a 10-min demo segment using the Name → Show → Confirm pattern. One-word feedback: Natural / Forced / Missed. Debrief together. Rotate once.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Collect the team's top real-life objections beforehand — especially ones where they currently feel stuck. Using live pain points makes the practice land harder.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Afternoon Break -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">2:15 PM</div><div class="break-dur">15 min</div></div>
+      <div class="break-icon">☕</div>
+      <div class="break-label">Afternoon Break</div>
+    </div>
+
+    <!-- 1.5 Demo Prep Workshop -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">2:30 PM</div><div class="scard-dur">75 min</div></div>
+        <div class="scard-icon">🏗️</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 1.5</div>
+          <div class="scard-title">Demo Prep Workshop</div>
+          <div class="scard-sub">What expectations to set, how to handle limited discovery info, and how to structure the Afterward story</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-workshop">Workshop</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">What do you do when you don't have all the discovery you need before a demo? How do you set expectations with the prospect, structure a story-led demo without perfect information, and still aim for technical agreement at the end? This session teaches you the prep disciplines that separate PSC who wing demos from those who own them — including how to deal with limited information in the discovery phase.</div></div>
+          <div class="identity-block"><strong>The storytelling shift:</strong> AAA gives you the structure. Audience = who the hero is. Annoyance = the problem they're stuck in. Afterward = the world they're trying to reach. Your demo is the bridge — every screen you show should be a scene in that journey, not a feature on a list.</div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>Setting expectations (15 min):</strong> Walk through how to open a demo when discovery is incomplete. How to name what you know, acknowledge what you don't, and use the demo itself to confirm. "Based on what I know so far, I've structured this around [Annoyance] — I want to check that's right as we go."</div></li>
+              <li><div class="step-n">2</div><div><strong>The Afterward story structure (20 min):</strong> Introduce AAA as a demo narrative frame. Walk through a real customer example mapped to all three. Show how the demo flows Annoyance → Afterward, each screen a scene in that transition. Does your current demo have a hero, a problem, and a resolution? Or just features?</div></li>
+              <li><div class="step-n">3</div><div><strong>Feature → solution → story language (15 min):</strong> Three modes side by side. Feature: "This dashboard shows real-time pipeline data." Solution: "This means you can see where deals are stalling." Story: "One of our customers used to lose two deals a quarter because their CRO couldn't see which reps needed coaching until it was too late — this is what changed that." Group rewrites 4–5 feature descriptions into story language.</div></li>
+              <li><div class="step-n">4</div><div><strong>Demo opening practice (25 min):</strong> Everyone practises a 90-second demo opening in the story frame — confirming what they know about the Annoyance and setting up the Afterward before showing anything. Pairs swap feedback. What made it feel like a story vs. a product tour?</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> The most powerful thing a PSC can say in a demo is "I had a customer in exactly this situation — here's what they did and what happened." Encourage the team to build a library of 3–5 Afterward stories they can pull into any demo.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Afternoon Break -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">3:45 PM</div><div class="break-dur">15 min</div></div>
+      <div class="break-icon">☕</div>
+      <div class="break-label">Afternoon Break</div>
+    </div>
+
+    <!-- 1.6 Demo Re-Build -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">4:00 PM</div><div class="scard-dur">75 min</div></div>
+        <div class="scard-icon">🔨</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 1.6</div>
+          <div class="scard-title">Demo Re-Build</div>
+          <div class="scard-sub">Script your opening, outline your full demo flow using the Afterward story structure</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-practice">Practice</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">The final session of Tuesday is about making it real. You'll take a demo you actually run and rebuild it from scratch using everything from today — the AAA story structure, requirements-led sequencing, the Afterward narrative. You'll script your opening word-for-word and outline the full demo flow. Tomorrow's practice will use what you build tonight, so treat this like a real deliverable.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>Individual rebuild (40 min):</strong> Each person works on their own demo. Prompt: Who is the Audience hero? What is the Annoyance — the real one, not the surface one? What does the Afterward look like in concrete terms? What are the 4–5 demo moments that tell that story? What gets cut? Write the opening word-for-word — the first 90 seconds.</div></li>
+              <li><div class="step-n">2</div><div><strong>Pair review (20 min):</strong> Partners share their rebuilt structure and opening. Feedback on one thing: does it feel like a story or a product tour? One thing to sharpen before tomorrow.</div></li>
+              <li><div class="step-n">3</div><div><strong>Group debrief (15 min):</strong> What patterns came up? What's the hardest part of the rebuild? Capture on the whiteboard — these are the things to watch for in Wednesday's practice.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> This is the bridge between Tuesday and Wednesday. The quality of work done here directly affects how useful the practice demos are tomorrow. Encourage people to be ambitious in the rebuild — this is the last safe moment to make structural changes.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wrap-up -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">5:15 PM</div><div class="scard-dur">30 min</div></div>
+        <div class="scard-icon">💬</div>
+        <div class="scard-info">
+          <div class="scard-title">Wrap-Up & Closing Remarks</div>
+          <div class="scard-sub">Key takeaways, preview of Wednesday, and what to do this evening</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-team">Team</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">A short close to the day. Share one thing that shifted your thinking — a reframe, a technique, a moment that hit differently. We'll also preview Wednesday so you know what to expect and can finish your demo prep this evening if needed.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div>Go around the room: one thing that shifted your thinking today.</div></li>
+              <li><div class="step-n">2</div><div>Preview Wednesday: morning is live demos, afternoon introduces a new brief and prep for Thursday's Big Demo in front of senior leaders. The stakes are real — use this evening to finish your rebuilt demo.</div></li>
+              <li><div class="step-n">3</div><div>Name what you're looking for from them tomorrow: take risks, be honest, give specific feedback.</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Time -->
+    <div class="personal-card">
+      <div class="break-time-block"><div class="break-time">5:45 PM</div><div class="break-dur">75 min</div></div>
+      <div class="break-icon">🧘</div>
+      <div class="break-label" style="color:var(--indigo);font-weight:500">Personal Time</div>
+      <div class="break-note" style="color:var(--mid)">Use this time to finish your demo rebuild from Session 1.6</div>
+    </div>
+
+    <!-- Team Event & Dinner -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">7:00 PM</div><div class="scard-dur">120 min</div></div>
+        <div class="scard-icon">🎉</div>
+        <div class="scard-info">
+          <div class="scard-title">Team Event & Dinner</div>
+          <div class="scard-sub">Fun evening activity followed by dinner</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-social">Social</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">After a full day in the room, we're heading out for a team activity followed by dinner. Details TBC — expect something fun and a little competitive. Dress comfortably.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">Activity Ideas</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div>Bowling, mini golf, or axe throwing — competitive, accessible, everyone participates.</div></li>
+              <li><div class="step-n">2</div><div>Cooking class or cocktail experience — conversation naturally built in.</div></li>
+              <li><div class="step-n">3</div><div>Escape room — team problem solving, creates shared stories to reference later.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Book in advance. Don't let the evening drag — respect that people have demo prep to finish. Dinner can be back at the hotel if needed.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════ WEDNESDAY ═══════════════════════ -->
+<div class="day-view" id="day-wed">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 3 · Wednesday</div>
+      <div class="day-title">Demo Day & Preparation</div>
+      <div class="day-goal">Morning: Live demos from Tuesday's rebuilt material, group feedback, and debrief. Afternoon: New prospect brief introduced — prep for Thursday's Big Demo with senior leaders.</div>
+    </div>
+    <div class="day-num">3</div>
+  </div>
+  <div class="session-list">
+
+    <!-- Arrival -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">8:30 AM</div><div class="break-dur">30 min</div></div>
+      <div class="break-icon">☕</div>
+      <div class="break-label">Arrival & Registration</div>
+    </div>
+
+    <!-- 2.1 Prospect Brief & Prep -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">9:00 AM</div><div class="scard-dur">60 min</div></div>
+        <div class="scard-icon">📋</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 2.1</div>
+          <div class="scard-title">Prospect Brief & Solo Prep</div>
+          <div class="scard-sub">Receive the brief — then prepare your demo independently</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-practice">Prep</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">You'll receive a detailed prospect brief — the same one for everyone. 45 minutes of quiet solo prep time: map the AAA, structure your story, decide what to show and what to cut, and plan how you'll close for technical agreement. No collaboration during prep — your approach should be entirely your own. That's what makes the group learning that follows so valuable.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">The Prospect Brief — What to Include</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>Company profile:</strong> Industry, size, current setup. Fictionalised version of a real prospect type your team encounters regularly.</div></li>
+              <li><div class="step-n">2</div><div><strong>Stakeholders in the room:</strong> 2–3 attendees with different roles — a champion, a sceptic, a decision-maker focused on ROI.</div></li>
+              <li><div class="step-n">3</div><div><strong>The Annoyance:</strong> What they shared on the discovery call — surface pain and underlying cost. Include one thing that's unclear or contradictory so presenters must make a judgment call.</div></li>
+              <li><div class="step-n">4</div><div><strong>The Afterward:</strong> What the prospect said a win looks like — specific outcomes, specific timeframe. The ending of the story each presenter needs to build toward.</div></li>
+              <li><div class="step-n">5</div><div><strong>The constraint:</strong> One requirement your solution only partially meets. Everyone must decide whether and how to address it.</div></li>
+            </ul>
+          </div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div>Hand out as a printed one-pager at 9:00 AM. Walk through it for 10 minutes — answer clarifying questions.</div></li>
+              <li><div class="step-n">2</div><div>Quiet solo prep 9:10–9:50 AM. No collaboration. You prep too — you'll go first.</div></li>
+              <li><div class="step-n">3</div><div>At 9:50 AM: 5-minute check-in. Any last questions? Then move straight into the first demo.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Print the brief as a one-pager — it feels more like a real RFP than a slide. Include just enough ambiguity that people make judgment calls. That's where the learning happens.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coffee Break -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">10:00 AM</div><div class="break-dur">15 min</div></div>
+      <div class="break-icon">☕</div>
+      <div class="break-label">Coffee Break</div>
+    </div>
+
+    <!-- 2.2 Live Demos -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">10:15 AM</div><div class="scard-dur">120 min</div></div>
+        <div class="scard-icon">🎬</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 2.2</div>
+          <div class="scard-title">Live Demos</div>
+          <div class="scard-sub">Full demos to the whole group — silent observation, structured group feedback after each</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-practice">Practice</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">All six presenters deliver their demo back-to-back to the whole group. When you're in the audience, observe silently and score using your pre-work scorecard. When each demo ends, everyone gives structured feedback — one specific observation anchored to a real moment. Because everyone worked from the same brief, feedback is precise and comparative.</div></div>
+          <div class="identity-block"><strong>What to look for — score against AAA:</strong> Did they open by naming the Audience and Annoyance before showing anything? Did the demo tell a story toward a clear Afterward? Did they use "a customer like you" story language? How did they handle the partial-fit constraint? Did they attempt a technical agreement close?</div>
+          <div class="detail-sec">
+            <div class="detail-label">Structure Per Presenter</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>Demo (15 mins):</strong> Full solution demo, silent observation, everyone scoring on their scorecard.</div></li>
+              <li><div class="step-n">2</div><div><strong>Self-reflection (2 mins):</strong> What went well? What would you change? Presenter speaks first, before the group.</div></li>
+              <li><div class="step-n">3</div><div><strong>Group feedback (3 mins):</strong> Each observer gives one specific observation anchored to a scorecard dimension and a real moment. Keep it tight — quality over quantity. You synthesise: the one thing to take forward.</div></li>
+              <li><div class="step-n">4</div><div><strong>Rotate immediately.</strong> Next presenter steps up — no gap.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> You present first. It models vulnerability, sets the standard, and gives the group a shared reference point. After your demo, self-reflect honestly out loud before they give you feedback. With 6 presenters at ~20 min each, this session runs to 2 hours — keep feedback tight.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lunch -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">12:15 PM</div><div class="break-dur">45 min</div></div>
+      <div class="break-icon">🥗</div>
+      <div class="break-label">Lunch Break</div>
+    </div>
+
+    <!-- 2.3 Group De-Brief -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">1:00 PM</div><div class="scard-dur">60 min</div></div>
+        <div class="scard-icon">🔎</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 2.3</div>
+          <div class="scard-title">Group De-Brief</div>
+          <div class="scard-sub">Identify patterns, areas of struggle, and learn from others — six demos, same brief</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-team">Team</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">Now that everyone has presented, we step back and look at the whole picture. Six people, same brief, six different demos. What patterns emerged? Where did almost everyone struggle? Where did one person crack something the others didn't? What you take from watching colleagues often stays with you longer than feedback on your own demo.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>The patterns (15 min):</strong> "Looking at all six demos — what did almost everyone do similarly? What did almost no one do?" Map shared strengths vs. shared gaps. Did anyone open by naming the Audience hero and Annoyance before showing anything? Did anyone use a customer story to illustrate the Afterward?</div></li>
+              <li><div class="step-n">2</div><div><strong>The standout moments (15 min):</strong> Name one moment from each presenter the group should remember. Each standout moment is a technique the whole group can borrow.</div></li>
+              <li><div class="step-n">3</div><div><strong>The partial-fit handling (10 min):</strong> How did each person handle the constraint? Did anyone maintain the Afterward story around it? Or retreat into feature mode? What does the group now believe is the right approach?</div></li>
+              <li><div class="step-n">4</div><div><strong>One thing each person takes from someone else (20 min):</strong> Each person states one thing they're changing based on something they observed in a colleague's demo. Capture all six on the whiteboard — these feed into tomorrow's Big Demo.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> If nobody addressed the partial fit honestly, name it: "Not one of us addressed the constraint directly. What does that tell us?" That discomfort, surfaced without blame, is one of the most valuable moments of the whole week.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.4 New Prospect Brief & Prep (for Thursday) -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">2:00 PM</div><div class="scard-dur">30 min</div></div>
+        <div class="scard-icon">📄</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 2.4</div>
+          <div class="scard-title">New Prospect Brief & Prep</div>
+          <div class="scard-sub">A new brief introduced — Thursday's Big Demo is in front of senior leaders</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-senior">Senior Leaders</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">A new prospect brief is introduced — different from this morning's. This is the scenario you'll present tomorrow in front of senior leaders from across the business. It's a higher-stakes demo, and you have one evening to prepare. Take this seriously — Thursday's Big Demo is the culminating performance of the summit.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div>Distribute the new brief. Read through it together — 10 minutes. Answer questions. Clarify who the senior leaders in the room will be and their context.</div></li>
+              <li><div class="step-n">2</div><div>Name what's different about this brief vs. this morning's — what does the group need to think about differently?</div></li>
+              <li><div class="step-n">3</div><div>Confirm that 2:45 PM Demo Prep time today and personal time this evening are for preparing this demo.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Make the Thursday scenario feel meaningfully different from Wednesday's — different industry, different Annoyance, different stakeholder profile. The best briefs have a clear Afterward that requires real story-building to reach, not just feature coverage.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Break -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">2:30 PM</div><div class="break-dur">15 min</div></div>
+      <div class="break-icon">☕</div>
+      <div class="break-label">Break</div>
+    </div>
+
+    <!-- 2.5 Demo Prep (for Thursday) -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">2:45 PM</div><div class="scard-dur">75 min</div></div>
+        <div class="scard-icon">🎯</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 2.5</div>
+          <div class="scard-title">Demo Prep — The Big Demo</div>
+          <div class="scard-sub">Apply all learnings to prepare for Thursday's performance in front of senior leaders</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-practice">Prep</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">This is structured prep time for Thursday's Big Demo. Apply everything you've learned — the AAA story structure, the requirements-led sequencing, the Afterward narrative, the technical agreement close — to the new brief. This isn't free time. It's focused, purposeful preparation. You'll finish with a complete demo outline and a scripted opening.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>Individual prep (40 min):</strong> Solo work. Map the AAA for the new brief. Build the story arc. Identify the 4–5 moments that carry the demo. Script the opening word-for-word. Plan where you'll use the technical agreement close.</div></li>
+              <li><div class="step-n">2</div><div><strong>Pair run-through (25 min):</strong> Each person delivers their scripted opening to their partner. Partner gives one-word feedback and one specific suggestion. Rotate. Use the remaining time to incorporate feedback.</div></li>
+              <li><div class="step-n">3</div><div><strong>Group check-in (10 min):</strong> Any common blockers? Anything the group needs to think through together before tomorrow?</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Circulate during individual prep. If someone is struggling with the story structure, nudge them toward the Afterward first — working backwards from a vivid Afterward makes the story much easier to build.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Break -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">4:00 PM</div><div class="break-dur">15 min</div></div>
+      <div class="break-icon">☕</div>
+      <div class="break-label">Break</div>
+    </div>
+
+    <!-- 2.6 Locking the Technical Agreement -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">4:15 PM</div><div class="scard-dur">60 min</div></div>
+        <div class="scard-icon">🔐</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 2.6</div>
+          <div class="scard-title">Locking the Technical Agreement</div>
+          <div class="scard-sub">Discovery → story demo → technical agreement. How to get the explicit yes.</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-identity">Identity</span><span class="badge badge-workshop">Workshop</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">This is the session that makes the whole week complete. Right now, deals move from demo to sales without the prospect ever explicitly confirming that your solution meets their needs. This session teaches you how to create that moment — how to ask for technical agreement in language rooted in the Afterward story you've been telling, what to do when you get a full yes, a partial yes, or a no, and how to make the AE handoff count. This matters especially for tomorrow: when you present in front of senior leaders, you should be aiming to close technical agreement from the room.</div></div>
+          <div class="identity-block"><strong>The completion of the mandate:</strong> Discovery → story demo → technical agreement. Each step this week has been building to this moment. PSC's job isn't done when the screen share closes. It's done when the prospect has explicitly confirmed the solution can meet their requirements.</div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>Why it doesn't happen (10 min):</strong> Ask honestly: "How many of you have explicitly asked a prospect whether the solution meets their requirements — in those words?" Discuss why it feels uncomfortable. Name the blockers out loud — they lose power when named.</div></li>
+              <li><div class="step-n">2</div><div><strong>Three ways to ask (15 min):</strong> The explicit ask: "Based on what we've shown today, do you believe this solution can meet the requirements you described?" The Afterward close: "We started today by talking about [the Annoyance]. What you've seen is how [customer type] got to [the Afterward]. Does what you've seen give you confidence we can get you there too?" The summary close: walk through each Annoyance confirmed addressed, invite the prospect to say where they stand. Group tries all three out loud.</div></li>
+              <li><div class="step-n">3</div><div><strong>Handling the three responses (20 min):</strong> Full yes — capture and communicate to AE. Partial yes — surface the gap, name it, decide whether to address now or flag in handoff. No — valuable intelligence. Roleplay one of each as a group.</div></li>
+              <li><div class="step-n">4</div><div><strong>Build it into tomorrow (15 min):</strong> Each person identifies exactly where and how they'll attempt technical agreement in their Thursday demo — which version of the close fits their brief, and what they'll do if they get a partial yes. Write it into their demo outline now.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> The most important moment is step 1 — the honest conversation about why it doesn't currently happen. Don't rush past it. If the team can name the real reason, you've done more to create change than any framework will.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wrap-up -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">5:15 PM</div><div class="scard-dur">30 min</div></div>
+        <div class="scard-icon">💬</div>
+        <div class="scard-info">
+          <div class="scard-title">Wrap-Up & Closing Remarks</div>
+          <div class="scard-sub">Key takeaways, final prep instructions for Thursday</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-team">Team</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">A short close before the evening. Tomorrow is the big day — senior leaders in the room, real-stakes demos. We'll recap what tomorrow looks like, confirm the schedule, and send you into the evening with clear instructions on what to finish tonight.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div>One thing from today each person is taking into tomorrow's demo.</div></li>
+              <li><div class="step-n">2</div><div>Walk through Thursday's schedule — who the senior leaders are, what you're expecting from the audience, how feedback will work.</div></li>
+              <li><div class="step-n">3</div><div>Final prep instruction: use personal time and tonight to complete your demo outline and practise your opening and close at least twice out loud.</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Time -->
+    <div class="personal-card">
+      <div class="break-time-block"><div class="break-time">5:45 PM</div><div class="break-dur">75 min</div></div>
+      <div class="break-icon">🧘</div>
+      <div class="break-label" style="color:var(--indigo);font-weight:500">Personal Time</div>
+      <div class="break-note" style="color:var(--mid)">Final prep for Thursday's Big Demo — practise your opening and close out loud</div>
+    </div>
+
+    <!-- Celebratory Dinner -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">7:00 PM</div><div class="scard-dur">120 min</div></div>
+        <div class="scard-icon">🥂</div>
+        <div class="scard-info">
+          <div class="scard-title">Celebratory Dinner</div>
+          <div class="scard-sub">Last evening together — celebrate what you've built</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-social">Social</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">A celebratory dinner to mark two days of hard work. There'll be a short toast to acknowledge what this team has built. Come ready to enjoy it — but get home in time to finish your prep for tomorrow.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Make It Special</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div>Choose a nicer restaurant than Tuesday — signal that this is a celebration.</div></li>
+              <li><div class="step-n">2</div><div>Short toast: acknowledge the week, what you saw, why you're proud. Genuine and brief — under 2 minutes.</div></li>
+              <li><div class="step-n">3</div><div>Keep the evening moving — people need to be sharp for Thursday morning.</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════ THURSDAY ═══════════════════════ -->
+<div class="day-view" id="day-thu">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 4 · Thursday</div>
+      <div class="day-title">The Big Demo & Locking the Technical Win</div>
+      <div class="day-goal">Live demos in front of senior leaders from across the business — the culminating performance of the summit. Followed by commitments and close. Departures after 12:45 PM.</div>
+    </div>
+    <div class="day-num">4</div>
+  </div>
+  <div class="session-list">
+
+    <!-- Arrival -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">8:30 AM</div><div class="break-dur">30 min</div></div>
+      <div class="break-icon">☕</div>
+      <div class="break-label">Arrival & Registration</div>
+      <div class="break-note">Senior leaders joining — ensure room is set up and ready</div>
+    </div>
+
+    <!-- 3.1 The Big Demo Part 1 -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">9:00 AM</div><div class="scard-dur">75 min</div></div>
+        <div class="scard-icon">🏆</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 3.1</div>
+          <div class="scard-title">The Big Demo — Part 1</div>
+          <div class="scard-sub">Live demos reviewed by senior leaders — first three presenters</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-senior">Senior Leaders</span><span class="badge badge-practice">Live</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">This is the culminating moment of the summit. Each person delivers a full solution demo in front of the whole group — including senior leaders from across the business. This is a real-stakes performance. Your job isn't just to impress — it's to understand the room's requirements, present the right solution as a story they can see themselves in, and close with a genuine attempt to get their agreement that the solution meets their needs.</div></div>
+          <div class="identity-callout" style="background:linear-gradient(135deg,rgba(79,70,229,0.05),rgba(124,58,237,0.05));border:1px solid var(--indigo-mid);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:18px;font-size:13px;color:var(--ink2);line-height:1.6;">
+            <strong style="color:var(--indigo)">The standard:</strong> Each demo should end with the presenter explicitly asking whether what they showed meets the audience's requirements — and handling the response with confidence and honesty. This is the moment that defines the technical win.
+          </div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>Introduction to senior leaders (5 min):</strong> Briefly introduce the group to the senior leaders in the room. Explain that the team has been working on story-led demos that aim to close technical agreement — and this is the culmination of that work.</div></li>
+              <li><div class="step-n">2</div><div><strong>Each demo (20 mins per person):</strong> Full solution demo to the panel. Senior leaders play stakeholders from the brief. Presenter must navigate the room, confirm the Annoyance early, tell the Afterward story, and close with a technical agreement attempt. Silent observation from peers — everyone scoring on their scorecard.</div></li>
+              <li><div class="step-n">3</div><div><strong>Structured feedback (5 mins per person):</strong> Senior leaders give one highlight. Peers give one sharpener. You go last as manager — honest, specific, generous.</div></li>
+              <li><div class="step-n">4</div><div><strong>Rotate immediately.</strong> Three presenters in this session.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Brief the senior leaders beforehand on what to look for and how to play their stakeholder role. Ask them to be realistic — engaged but not artificially easy. Remind them that the team has been trained to handle a "partial yes" and a "no" honestly. Let it play out.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coffee Break -->
+    <div class="break-card">
+      <div class="break-time-block"><div class="break-time">10:15 AM</div><div class="break-dur">15 min</div></div>
+      <div class="break-icon">☕</div>
+      <div class="break-label">Coffee Break</div>
+    </div>
+
+    <!-- 3.2 The Big Demo Part 2 -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">10:30 AM</div><div class="scard-dur">75 min</div></div>
+        <div class="scard-icon">🏆</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 3.2</div>
+          <div class="scard-title">The Big Demo — Part 2</div>
+          <div class="scard-sub">Live demos reviewed by senior leaders — final three presenters</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-senior">Senior Leaders</span><span class="badge badge-practice">Live</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">Same format as Part 1 — the final three presenters. The group has now seen three demos from the same brief, which sharpens the feedback instincts of the observers. The afternoon presenters also go in knowing what their colleagues did, which raises the bar. Same expectations: story-led, Afterward-focused, and closing for technical agreement.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div><strong>Each demo (20 mins per person):</strong> Full solution demo to the panel. Senior leaders maintain their stakeholder roles. Presenter navigates the room and closes for technical agreement.</div></li>
+              <li><div class="step-n">2</div><div><strong>Structured feedback (5 mins per person):</strong> Senior leaders give one highlight. Peers give one sharpener. You synthesise: the one thing to take forward.</div></li>
+              <li><div class="step-n">3</div><div><strong>Close the session (10 min):</strong> After all three, thank the senior leaders and give them a moment to share their overall impression of the team. This is powerful — it signals to the team that their work is seen and valued at a senior level.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> After the last demo, ask each senior leader to share one sentence on what they observed across the session as a whole — not individual feedback, but what the team demonstrated collectively. That moment signals to the team that this was real and that it landed.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.3 Commitments -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">11:45 AM</div><div class="scard-dur">30 min</div></div>
+        <div class="scard-icon">📌</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 3.3</div>
+          <div class="scard-title">Commitments Session</div>
+          <div class="scard-sub">One specific behaviour change — said out loud to the team</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-team">Team</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">Each person states one specific commitment they're taking home — not a vague intention but a concrete behaviour change you'll apply in your next three demos. You say it out loud to your peers, and they hold you to it. A 30-day check-in will be scheduled before you leave the room.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div>One specific, observable commitment per person — not "get better at discovery" but "I'm going to map the AAA before every demo and share it with the AE 48 hours in advance."</div></li>
+              <li><div class="step-n">2</div><div>After each person shares, others add "I'll hold you to that."</div></li>
+              <li><div class="step-n">3</div><div>Capture all commitments and send as a group doc today.</div></li>
+              <li><div class="step-n">4</div><div>Schedule the 30-day check-in now — put it in the calendar before people leave the room.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Look for commitments that connect to the full mandate — AAA mapping, story framing, and the technical agreement close. If someone stops at "better demos," push them: "What specifically will you do differently at the end of the demo?"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.4 PSC Summit Close -->
+    <div class="scard" onclick="toggleCard(this)">
+      <div class="scard-header">
+        <div class="scard-time-block"><div class="scard-time">12:15 PM</div><div class="scard-dur">30 min</div></div>
+        <div class="scard-icon">🏔️</div>
+        <div class="scard-info">
+          <div class="scard-num">Session 3.4</div>
+          <div class="scard-title">PSC Summit Close</div>
+          <div class="scard-sub">Final words — send the team off on a high</div>
+        </div>
+        <div class="scard-right"><span class="badge badge-team">Team</span><div class="scard-chevron">▾</div></div>
+      </div>
+      <div class="scard-detail">
+        <div class="scard-detail-inner">
+          <div class="att-block"><div class="att-label">For attendees</div><div class="att-text">The final session of PSC Summit. A few closing words about what this week meant, what was seen in this team, and where you're heading. Then lunch and departure — flights after 12:45 PM.</div></div>
+          <div class="detail-sec">
+            <div class="detail-label">How to Run It</div>
+            <ul class="steps">
+              <li><div class="step-n">1</div><div>No slides. Stand up. Make it a speech, not a summary.</div></li>
+              <li><div class="step-n">2</div><div>Open with something specific you saw this week that you didn't expect — individual moments, individual people.</div></li>
+              <li><div class="step-n">3</div><div>Name the shift: this team came in as people who do great demos. They're leaving as people who own the technical win.</div></li>
+              <li><div class="step-n">4</div><div>Paint the picture forward — what's possible in the next 6 months if they apply the mandate consistently.</div></li>
+              <li><div class="step-n">5</div><div>End with appreciation. Simple, genuine, no performance needed.</div></li>
+            </ul>
+          </div>
+          <div class="tip-box"><strong>Manager tip:</strong> Echo the opening. You started Tuesday by naming the gap — "a great demo without a locked technical agreement is an incomplete job." End Thursday by naming the change — "this team now knows how to do the complete job."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lunch and Leave -->
+    <div class="break-card" style="border-color:var(--indigo-mid);background:var(--indigo-light);">
+      <div class="break-time-block"><div class="break-time" style="color:var(--indigo)">12:45 PM</div><div class="break-dur" style="color:var(--indigo)">Depart</div></div>
+      <div class="break-icon">✈️</div>
+      <div class="break-label" style="color:var(--indigo);font-weight:600">Lunch and Leave</div>
+      <div class="break-note" style="color:var(--indigo)">Departures after 12:45 PM — please ensure flights are booked after this time</div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- .main -->
+
+<script>
+function showDay(day, el) {
+  document.querySelectorAll('.day-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('day-' + day).classList.add('active');
+  el.classList.add('active');
+}
+function toggleCard(card) { card.classList.toggle('open'); }
+</script>
+</body>
+</html>
