@@ -1134,6 +1134,12 @@ function showPage(pageId) {
 function toggleSession(element) {
   element.parentElement.classList.toggle('open');
 }
+
+	window.addEventListener('DOMContentLoaded', () => {
+  if (window.location.hash === '#full') {
+    toggleEasterEgg();
+  }
+});
 </script>
 
 </body>
