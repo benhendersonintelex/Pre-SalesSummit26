@@ -1161,6 +1161,43 @@ function toggleSession(element) {
   }
 });
 </script>
+<script>
+// Bump this string every time you make a meaningful update to the page
+const CURRENT_VERSION = '2026-09-02 V1';
 
+function checkForUpdates() {
+  const lastSeenVersion = localStorage.getItem('pscSummitVersion');
+
+  if (lastSeenVersion && lastSeenVersion !== CURRENT_VERSION) {
+    showUpdateBanner();
+  }
+
+  // Record that they've now seen the current version
+  localStorage.setItem('pscSummitVersion', CURRENT_VERSION);
+}
+
+function showUpdateBanner() {
+  const banner = document.createElement('div');
+  banner.textContent = "This page has been updated since your last visit.";
+  banner.style.cssText = `
+    background: linear-gradient(135deg, var(--indigo), var(--violet));
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  `;
+  banner.onclick = () => banner.remove();
+  document.body.insertBefore(banner, document.body.firstChild);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  checkForUpdates();
+  if (window.location.hash === '#full') {
+    toggleEasterEgg();
+  }
+});
+</script>
 </body>
 </html>
