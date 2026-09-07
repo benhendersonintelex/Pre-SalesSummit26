@@ -463,8 +463,8 @@ h1 .accent {
 <div class="nav-tabs">
   <button class="nav-tab active" onclick="showPage('overview')">Week at a Glance</button>
   <button class="nav-tab" onclick="showPage('pre')">Pre-Work</button>
-  <button class="nav-tab hidden" onclick="showPage('mon')">Monday</button>
-  <button class="nav-tab hidden" onclick="showPage('tue')">Tuesday</button>
+  <button class="nav-tab" onclick="showPage('mon')">Monday</button>
+  <button class="nav-tab" onclick="showPage('tue')">Tuesday</button>
   <button class="nav-tab hidden" onclick="showPage('wed')">Wednesday</button>
   <button class="nav-tab hidden" onclick="showPage('thu')">Thursday</button>
 </div>
@@ -1164,7 +1164,7 @@ function toggleSession(element) {
 </script>
 <script>
 // Bump this string every time you make a meaningful update to the page
-const CURRENT_VERSION = '2026-09-02 V3';
+const CURRENT_VERSION = '2026-09-02 V4';
 
 function checkForUpdates() {
   const lastSeenVersion = localStorage.getItem('pscSummitVersion');
